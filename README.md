@@ -13,7 +13,7 @@ The Quantum Demontrator Lite utilises 21 RC522 readers to maximise flexibility w
 
 It was designed to be somewhat affordable to institutions and Schools, with a price around 400€ depending of the suppliers you choose, and the means of assembly.
 
-## Getting Started
+# Getting Started
 For anybody wanting to build the Demonstrator, you should have a few prerequisite Tools:
 | Tool | |
 | --- | --- |
@@ -72,7 +72,7 @@ These connectors are labeled with A.1, A.2 and B.1, B.2. This is neccessary due 
 
 **Two Boards must be configured with the A.1 and A.2 ports soldered and one Board with the B.1 and B.2 ports**
 ![Conn PCB](pics/elektronik_3.png)
-**QD_main PCB**
+
 
 For all three Connection PCB, you will need:
 | ID | Designator | Value/Component | Footprint | Qty | Source | Cost |
@@ -92,8 +92,73 @@ For all three Connection PCB, you will need:
 | 3 | NFC Tags | 38 mm - NTAG 213 - 180 Byte | 50 | [NFC-Tag-Shop](https://www.nfc-tag-shop.de/en/NFC-Sticker-PET-38-mm-NTAG-213-180-Byte-white/68261) | 29,50€ |
 
 
+## Mechanical Construction
+The Case for the Quantum Demonstrator is Mostly 3D Printed, with two extra Aluminium Extrusions for stability. 
+
+Rccommended Print settings:
+| | | | | | |
+|:---|:---:|:---|:---:|:---|:---:|
+| Material: | PLA or PETG | Print Bed: | Satin or Textured | Infill: | 10-15% Gyroid|
+| Nozzle Size: | 0.4mm | Layer height: | 0.15mm | Supports: | Only on bed |
+
+### Bill of Materials
+| Item | Quantity | Description | Suplier | Costs |
+|:---:|:---:|:---|:---|:---:|
+| 1 | 1 | PCB Main | | 100€ |
+| 2 | 3 | Conn PCB | | 43€ |
+| 3 | 1 | Switch | | 2,50€ |
+| 4 | 2 | 594 mm 2020 Profile| [Motedis](https://www.motedis.com/de/Aluprofil-20x20-B-Typ-Nut-6) | 9€ |
+| 5 | 1 | 🔴 Front Centre | | |
+| 6 | 1 | 🔴 Middle Centre | | |
+| 7 | 1 | 🔴 Rear Centre | | |
+| 8 | 1 | 🔴 Corner Shoulder 1 | | |
+| 9 | 1 | 🔴 Middle Shoulder 1 | | |
+| 10 | 2 | 🔴 Corner Shoulder 2 | | |
+| 11 | 1 | 🔴 Corner Shoulder 3 | | |
+| 12 | 1 | 🔴 Middle Shoulder 2 | | |
+| 13 | 3 | 🔴 Feet | | |
+| 14 | 1 | 🔴 Lid Part 1/3 | | |
+| 15 | 1 | 🔴 Lid Part 3/1 | | |
+| 16 | 1 | 🔴 Lid Part 2 | | |
+| 17 | 31 | Hex screw M4x0.70 x 12 A2 | [Motedis](https://www.motedis.com/de/Zylinderschraube-mit-Innensechskant-nach-DIN-912/M4x12) | 4,17€ |
+| 18 | 6 | Hex socket head cap screw M4x0.70 x 40 A2 | [Motedis](https://www.motedis.com/de/Sonderschraube-Stossverbinder-M4x40-180G-N5-I-Typ) | 1,70€ |
+| 19 | 12 | Hex countersunk screw M4x0.70 x10 A2 | [Motedis](https://www.motedis.com/de/Senkschraube-mit-Innensechskant-nach-DIN-7991/M4x10) | 3,17€ |
+| 20 | 2 | 🔴 Lidholder type 1 | | |
+| 21 | 2 | 🔴 Lidholder type 2 | | |
+| 22 | 2 | 🔴 Lidholder type 3 | | |
+| 23 | 2 | PETG 3D-printing Filament | [Prusa3D]({https://www.prusa3d.com/product/prusament-petg-prusa-galaxy-black-1kg-nfc) | 58€ |
+| 24 | 39 | Heatset Insert M4| [CNC Kitchen](https://cnckitchen.store/products/heat-set-insert-m4-x-4-short-version-100-pieces)|9,40€|
+| 25 | xx | Heatset Insert M2|||
+| 26 | xx | T-Nut6-M4  Bosch Rexroth compatible|||
+
+*BOM of Assembly 1, List of Parts to 3D print marked in (🔴)*
+
+*Todo: Link Parts in here to parts in Project*
+
+## Assembly of the Case
+
+### Heatset Inserts
+In preperation for assembly, insert the threaded Heatset Inserts into the pre made holes.
+For this set your soldering iron to aroun 250°C and slowly but firmly melt and press the insert into the hole. Try to keep it as level as possible to the Surface. The Following pcitures show where to position the Inserts.
+| Top Side | Bottom Side |
+|:--:|:--:|
+|![Positions of Heatset inserts](/pics/heatset_inserts_marked.png)|![Positions of Heatset inserts](/pics/heatset_inserts_marked_2.png)
+
+### Connection to the Aluminium Extrusion
+![Positions of Screws](/pics/cad_2.png)
+There are multiple screwholes from the outside accessing the Aluminium extrusion. Insert the Matching screw, at a T-Nut onto it, and slide it onto the Aluminium Extrusion. 
+Start with the Shoulder Sections, then do the middle section, then the Feet to tie it all to gether. Only put the lid on right at the end.
+
+### Mounting of PCBs
+The Connection PCBs are screwed down with three M4 Screws, while the Main PCB is screwed down with three M2 screws.
+![Positions of Screws](/pics/cad_3.png)
+
+### Installing LEDs
+Glue the LED strip down on the marked region. Make sure the Pinout is correct, adn solder it to the given Pads.
+To aid in diffusion a Thin plastic sheet is glued to the back of the Lid pieced to coder the Lighting slits (A piece of paper also works).
+
 ## Software
-The Quantum Demonstrator uses some Embedded and some PC side software. 
+The Quantum Demonstrator requires some Embedded and some PC side software. 
 ### Prerequisites
 | Software | |
 | --- | --- |
@@ -102,3 +167,21 @@ The Quantum Demonstrator uses some Embedded and some PC side software.
 | Tkinter 3.14 | or newer. Needed for the GUI on the PC side|
 
 ### Embedded Software
+Flash the C++ Program [`main.cpp`](Embedded_Software/src/main.cpp) onto the Raspberry Pi Pico 2 via USB. 
+
+### PC Side Software 
+Download the [`PC_side_Software/`](/PC_side_Software/README.md) folder and run 
+
+
+    python main.py          
+
+Quick check without hardware or GUI:
+
+    python selftest.py
+
+**For a more in depth explaination:** [`/PC_side_Software/README.md/`](/PC_side_Software/README.md)
+
+
+
+
+# Using the Quantum Demonstrator (Work in Progress)
