@@ -1,0 +1,79 @@
+{
+  "Spin System": "Homonuclear",
+  "desc": "Inputfile from DevBoard",
+  "groups": [],
+  "menu_path": [],
+  "name": "Qu_20261016_165241",
+  "table": [
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    },
+    {
+      "gate": {
+        "gates": [
+          "E2",
+          "E2",
+          "E2"
+        ],
+        "name": "Empty"
+      }
+    }
+  ]
+}

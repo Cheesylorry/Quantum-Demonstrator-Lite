@@ -3,7 +3,7 @@ A Plug and play Quantum Algorythm for Students. Integrates into SpinDrops, a sof
 
 
 ![Title Pic of setup](pics/title_pic.JPG)
-*Picture of the Setup used in the Max Planck Institute of Quantum Optics*
+*Picture of the Setup used at the Max Planck Institute of Quantum Optics*
 
 
 The Quantum Demonstrator Lite can be used to demonstrate algorithms up to three Qubits over seven positions, and these can be viewed in Detail with the Spin Drops Software, available at https://spindrops.org/2.5.0-beta1/download.html *(We recommend going with the Beta, as it has the updated visualisation)*
@@ -134,6 +134,9 @@ Rccommended Print settings:
 *BOM of Assembly 1, List of Parts to 3D print marked in (🔴)*
 
 *Todo: Link Parts in here to parts in Project*
+![Positions of Heatset inserts](/pics/prusaxl_print.png)
+On the Prusa XL this would need 4-5 Printbeds
+
 
 ## Assembly of the Case
 
@@ -181,7 +184,24 @@ Quick check without hardware or GUI:
 
 **For a more in depth explaination:** [`/PC_side_Software/README.md/`](/PC_side_Software/README.md)
 
-
+## Constructing the Quantum Gates
+Download the desired Gates from [`/CAD files/Quantum Gates/`](/CAD%20files/Quantum%20Gates/) and 3D print them. Then glue An NFC Tag into each Indent (on single Qubit gates only one, on Mulit Qubit gates two or even three)
 
 
 # Using the Quantum Demonstrator (Work in Progress)
+Connect the Demonstrator to 12V power and USB, and Turn it on
+Start python main.py and select the USB device in the dropdown Menu, and check if you can see Gates appear when you place them on the readers.
+![Software view V1](/pics/software1.png)
+"The Autowrite Json" automatically writes the JSON ever time an update is registered. This mean you can cuntinously import these files into spindrops.
+Now Start spindrops and import the newest generated Json File.
+Congratulations! You now have a functioning Quantum Demonstrator.
+
+# Enrolling New Gates into the Database (Heavy Work in Progress)
+Run
+    python enroll.py --port /dev/ttyACM0
+and then follow the instructions. The Names are only Important if you want to designate your own gates
+
+| Real World Gate | Database Shortname to use|
+| --- | --- |
+| Hadamard | **H**|
+| Not | **X** |

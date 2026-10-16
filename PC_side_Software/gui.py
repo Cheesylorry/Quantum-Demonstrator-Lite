@@ -44,7 +44,7 @@ class App(tk.Tk):
                  port: str | None = None, baud: int = 115200):
         super().__init__()
         self.title("Quanten Demonstrator PC side interface")
-        self.resizable(False, False)
+        self.resizable(True, True)
 
         self.db = GateDatabase(db_path)
         self.writer = JsonWriter(out_dir)
