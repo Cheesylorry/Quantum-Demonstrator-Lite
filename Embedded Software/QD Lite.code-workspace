@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "QD Lite",
+			"path": "../../QD Lite"
+		},
+		{
+			"name": "Proper RC522 Distance reading test",
+			"path": "../../Distance Reading test/Proper RC522 Distance reading test"
+		},
+		{
+			"name": "QD_lite_main",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

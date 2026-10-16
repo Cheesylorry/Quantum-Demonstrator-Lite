@@ -1,0 +1,24 @@
+uid,display_name,type,family,role,figure_id,gate_string,sqrt,inverse
+4000001,Hadamard A,single,,,,H,false,false
+4000002,Hadamard B,single,,,,H,false,false
+4000003,Pauli X,single,,,,X,false,false
+4000004,Sqrt(NOT),single,,,,X,true,false
+4000005,Phase 60,single,,,,phase(60),false,false
+4000010,CNOT#1 control,multi_part,CNOT,control,CNOT#1,,,
+4000011,CNOT#1 target,multi_part,CNOT,target,CNOT#1,,,
+4000012,CNOT#2 control,multi_part,CNOT,control,CNOT#2,,,
+4000013,CNOT#2 target,multi_part,CNOT,target,CNOT#2,,,
+4000020,CZ#1 control,multi_part,CZ,control,CZ#1,,,
+4000021,CZ#1 target,multi_part,CZ,target,CZ#1,,,
+4000030,Toffoli#1 control A,multi_part,Toffoli,control1,Toffoli#1,,,
+4000031,Toffoli#1 control B,multi_part,Toffoli,control2,Toffoli#1,,,
+4000032,Toffoli#1 target,multi_part,Toffoli,target,Toffoli#1,,,
+4000040,Measure Z (a),measurement,,,,z,,
+4000041,Measure Z (b),measurement,,,,z,,
+4000042,Measure Z (c),measurement,,,,z,,
+4000050,Measure X (a),measurement,,,,x,,
+0425B382BC1F90,Hadamard 1,single,,,,H,false,false
+045EB382BC1F90,Not 1,single,,,,X,false,false
+0443B382BC1F90,Hadamard 2,single,,,,H,false,false
+0442B382BC1F90,CNOT#3 control,multi_part,CNOT,control,CNOT#3,,false,false
+0423B382BC1F90,CNOT#3 target,multi_part,CNOT,target,CNOT#3,,false,false
