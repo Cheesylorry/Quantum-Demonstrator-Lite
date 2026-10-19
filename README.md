@@ -1,5 +1,5 @@
 # Quantum-Demonstrator-Lite
-A Plug and play Quantum Algorythm for Students. Integrates into SpinDrops, a software for visualising up to three Qubits, with fully customisable Quantum Gates.
+A Plug and play Quantum Algorithm Demonstrator for Students. Integrates into SpinDrops, a software for visualising up to three Qubits, with fully customisable Quantum Gates.
 
 
 ![Title Pic of setup](pics/title_pic.JPG)
