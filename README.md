@@ -21,7 +21,7 @@ For anybody wanting to build the Demonstrator, you should have a few prerequisit
 | Soldering Iron | A fine tipped Soldering Station/Iron is necesary, should you decide to assemble the PCB yourself, Solder flux, tweezers, tin snips and more standard Soldering tools are required|
 | Hex Bits | A standard Metric Set of Hex bits |
 
-*Note: Should you decide to assemble the PCB yourself, be aware the SMD components are not the easiest to work with. A revamped version is a WIP which will drasitcally reduce the amount of components needed*
+*Note: Should you decide to assemble the PCB yourself, be aware the SMD components are not the easiest to work with. A revamped version is a WIP which will drastically reduce the amount of components needed*
 
 ## Electronics
 |[`Electronics/`](Electronics/README.md) contains the PCB Schematic and Board design. The PCB was designed in KiCad.
