@@ -205,3 +205,5 @@ and then follow the instructions. The Names are only Important if you want to de
 | --- | --- |
 | Hadamard | **H**|
 | Not | **X** |
+| Phase | **Phase([deg])**|
+| | | 
