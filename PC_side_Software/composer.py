@@ -1,19 +1,19 @@
 """Board -> SpinDrops JSON composition and validation.
 
 Every column (time step) must independently pass validation before any
-JSON is emitted; a single invalid column blocks the whole file so
+JSON is created; a single invalid column blocks the whole file so
 SpinDrops can never be fed a crashing configuration (e.g. a CNOT and a
 Hadamard sharing one time step).
 
 Column rules:
-  * unknown UID anywhere            -> invalid
-  * any multi_part tag present      -> ALL tags in the column must belong to
+  - unknown UID anywhere            -> invalid
+  - any multi_part tag present      -> ALL tags in the column must belong to
                                        the same figure_id, with every role of
                                        its family present exactly once, and
                                        nothing else in the column
-  * any measurement tag present     -> only measurement tags allowed, and all
+  - any measurement tag present     -> only measurement tags allowed, and all
                                        must share the same basis
-  * otherwise (single gates only)   -> always valid; E2 fills empty rows
+  - otherwise (single gates only)   -> always valid; E2 fills empty rows
 """
 
 from dataclasses import dataclass, field
@@ -22,6 +22,8 @@ from board import NUM_ROWS, NUM_COLS
 from database import GateDatabase, TagEntry
 from families import FAMILIES
 
+
+# Required such that the Spin drops file represents the amount of steps on the board
 EMPTY_COLUMN = {"gate": {"gates": ["E2"] * NUM_ROWS, "name": "Empty"}}
 
 
@@ -36,7 +38,7 @@ class ColumnResult:
 
 
 @dataclass
-class BoardResult:
+class BoardResult:                              #
     columns: list[ColumnResult]
     cell_status: dict[tuple[int, int], str]   # (row,col) -> status keyword
 
@@ -55,6 +57,7 @@ class BoardResult:
         for col, c in enumerate(self.columns):
             out.extend(f"Step {col + 1}: {e}" for e in c.errors)
         return out
+
 
 
 def compose_board(cells: dict[tuple[int, int], str],
@@ -85,7 +88,7 @@ def compose_board(cells: dict[tuple[int, int], str],
 # --------------------------------------------------------------------------
 def _compose_column(tags: list[tuple[int, str, TagEntry | None]]
                     ) -> ColumnResult:
-    if not tags:
+    if not tags:                                            # Empty column detection
         return ColumnResult(json_obj=dict(EMPTY_COLUMN))
 
     errors = [f"unknown tag {uid} on Qubit {row + 1} (not in database)"
@@ -102,12 +105,12 @@ def _compose_column(tags: list[tuple[int, str, TagEntry | None]]
         return _compose_measurement(known, types)
     return _compose_singles(known)
 
-
+# Multi position Gates
 def _compose_multi(known: list[tuple[int, TagEntry]],
                    types: set[str]) -> ColumnResult:
     errors: list[str] = []
 
-    # Rule 1: nothing but parts of ONE figure may share the column.
+    #1: nothing but parts of ONE figure may share the column.
     intruders = [(r, e) for r, e in known if e.type != "multi_part"]
     for r, e in intruders:
         errors.append(f"'{e.display_name}' (Qubit {r + 1}) cannot share a "
@@ -121,7 +124,7 @@ def _compose_multi(known: list[tuple[int, TagEntry]],
     if errors:
         return ColumnResult(None, errors)
 
-    # Rule 2: completeness -- every role exactly once.
+    #2: completeness every role must exisst ecactly once.
     family_name = parts[0][1].family
     family = FAMILIES[family_name]
     role_rows: dict[str, list[int]] = {}
@@ -152,7 +155,7 @@ def _compose_multi(known: list[tuple[int, TagEntry]],
     }}
     return ColumnResult(obj)
 
-
+# Measurement
 def _compose_measurement(known: list[tuple[int, TagEntry]],
                          types: set[str]) -> ColumnResult:
     errors: list[str] = []
@@ -174,7 +177,7 @@ def _compose_measurement(known: list[tuple[int, TagEntry]],
         meas[f"qbit{r + 1}"] = True
     return ColumnResult({"measurement": meas})
 
-
+# Single posititon Gates
 def _compose_singles(known: list[tuple[int, TagEntry]]) -> ColumnResult:
     gates = ["E2"] * NUM_ROWS
     sqrt = [False] * NUM_ROWS

@@ -147,7 +147,7 @@ class TagSource:
             raise Abort()
 
 
-# ---------------------------------------------------------------- enrollment
+# enrollment
 def resolve_conflict(db: GateDatabase, uid: str) -> bool:
     """Returns True if we may (over)write this UID, False to pick another."""
     existing = db.lookup(uid)
@@ -248,7 +248,7 @@ def list_db(db: GateDatabase) -> None:
         print(f"  {e.uid:16s} {e.type:12s} {e.display_name:24s} {extra}")
 
 
-# --------------------------------------------------------------------- main
+# main
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", default="gates.csv")

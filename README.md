@@ -192,18 +192,33 @@ Download the desired Gates from [`/CAD files/Quantum Gates/`](/CAD%20files/Quant
 Connect the Demonstrator to 12V power and USB, and Turn it on
 Start python main.py and select the USB device in the dropdown Menu, and check if you can see Gates appear when you place them on the readers.
 ![Software view V1](/pics/software1.png)
-"The Autowrite Json" automatically writes the JSON ever time an update is registered. This mean you can cuntinously import these files into spindrops.
-Now Start spindrops and import the newest generated Json File.
+"The Autowrite Json" automatically writes the JSON ever time an update is registered. This means you can continously import these files into spindrops.The directroy it deposits the files in can be chosen on launch.
+Now Start spindrops and import the newly generated QD_output.json File.
 Congratulations! You now have a functioning Quantum Demonstrator.
 
 # Enrolling New Gates into the Database (Heavy Work in Progress)
 Run
     python enroll.py --port /dev/ttyACM0
-and then follow the instructions. The Names are only Important if you want to designate your own gates
+and then follow the instructions. The Names are only Important if you want to designate your own gates via the spin drops Syntax.
 
 | Real World Gate | Database Shortname to use|
 | --- | --- |
 | Hadamard | **H**|
 | Not | **X** |
-| Phase | **Phase([deg])**|
+| Phase | **Phase(*[deg]*)**|
 | | | 
+
+# Known Issues / ToDo
+When enrolling gates the UUID gets entered incorrectly. *Fix: Use multiple reads and verify against each other* - Temporary fix, reenroll the gate.
+
+## ToDo
+- Add GUI to the enroll process
+- Fix framing issues in gui.py
+- Add .desktop entry? 
+- remove file rewrite, overwrite instead
+- Proper spindrops integration
+
+
+# Revamped PCB (HEAVY WIP)
+to lower the costs of single piece production move from custom designed Voltage conversion to premade TRACOS.
+

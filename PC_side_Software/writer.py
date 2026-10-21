@@ -13,7 +13,7 @@ import json
 import os
 import time
 
-DEFAULT_PREFIX = "Qu"
+DEFAULT_PREFIX = "QD_in"
 
 
 class JsonWriter:
@@ -32,10 +32,21 @@ class JsonWriter:
 
     def _unique_stem(self) -> str:
         stamp = time.strftime("%Y%m%d_%H%M%S")
-        stem = f"{self.prefix}_{stamp}"
+        stem = f"{self.prefix}_{stamp}"     #to keep all
+        alt_stem = f"{self.prefix}"          #to overwrite
         candidate, n = stem, 1
         while os.path.exists(os.path.join(self.out_dir, candidate + ".json")):
             candidate = f"{stem}_{n:02d}"
+            n += 1
+        return candidate
+    
+    def _not_so_unique_stem(self) -> str:
+        stamp = time.strftime("%Y%m%d_%H%M%S")
+        stem = f"{self.prefix}_{stamp}"     #to keep all
+        alt_stem = f"{self.prefix}"          #to overwrite
+        candidate, n = alt_stem, 1
+        while os.path.exists(os.path.join(self.out_dir, candidate + ".json")):
+            candidate = f"{alt_stem}_{n:02d}"
             n += 1
         return candidate
 
@@ -46,6 +57,7 @@ class JsonWriter:
             return None
         os.makedirs(self.out_dir, exist_ok=True)
         stem = self._unique_stem()
+        alt_stem = self._not_so_unique_stem()
         doc = {
             "Spin System": "Homonuclear",
             "desc": "Inputfile from DevBoard",
@@ -54,7 +66,8 @@ class JsonWriter:
             "name": stem,
             "table": table,
         }
-        path = os.path.join(self.out_dir, stem + ".json")
+        #path = os.path.join(self.out_dir, alt_stem + ".json")
+        path = os.path.join(self.out_dir, "QD_output" + ".json")
         tmp = path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(doc, f, indent=2, ensure_ascii=False)
