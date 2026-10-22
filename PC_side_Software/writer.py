@@ -1,12 +1,10 @@
-"""SpinDrops JSON output.
+"""QuBeads JSON output.
 
-Files are written atomically (temp file + os.replace) so a consumer that
-polls the folder can never read a half-written file, and only when the
-composed table actually differs from the last written one, so transient
-re-reads on the hardware never spam identical files.
+Files are written atomically (temp file + os.replacement) so a user that polls the folder 
+can never read a half-written file, and only when the composed table actually 
+differs from the last written one, so transient re-reads on the hardware never spam identical files.
 
-Every file gets a unique name, e.g.  Qu_20260720_154212.json, and the
-internal "name" field matches the filename stem.
+every file name is the same 'QD_output.json' and the 'name' field differs but includes the timestamp
 """
 
 import json
