@@ -66,7 +66,7 @@ class GateDatabase:
         self.load_errors: list[str] = []
         self.reload()
 
-    # ------------------------------------------------------------------ load
+    # load
     def reload(self) -> None:
         self.entries = {}
         self.load_errors = []
@@ -136,11 +136,11 @@ class GateDatabase:
         self.entries[uid] = entry
         return None
 
-    # ---------------------------------------------------------------- lookup
+    # lookup
     def lookup(self, uid: str) -> TagEntry | None:
         return self.entries.get(normalize_uid(uid))
 
-    # ------------------------------------------------------- grouped listing
+    # grouped listing
     def singles(self) -> list[TagEntry]:
         return sorted((e for e in self.entries.values() if e.type == "single"),
                       key=lambda e: e.display_name)
@@ -162,7 +162,7 @@ class GateDatabase:
                        if e.role in order else 99)
         return dict(sorted(figs.items()))
 
-    # ---------------------------------------------------------------- upsert
+    # upsert
     def upsert_entry(self, entry: TagEntry) -> None:
         """Insert the entry, or overwrite the existing row with the same UID.
         Rewrites the CSV atomically and reloads."""
@@ -206,7 +206,7 @@ class GateDatabase:
         os.replace(tmp, self.path)
         self.reload()
 
-    # ---------------------------------------------------------------- append
+    # append
     def append_entry(self, entry: TagEntry) -> str | None:
         """Append a new tag to the CSV and reload. Returns error or None."""
         if self.lookup(entry.uid):

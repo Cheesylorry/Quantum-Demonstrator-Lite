@@ -1,10 +1,10 @@
-"""Self-test without hardware or GUI: python selftest.py
+"""Selftest without hardware or GUI: python selftest.py
 
 1. Rebuilds the Teleportation circuit purely from simulated tag placements
    and compares the composed table against the known-good structure.
-2. Verifies the SpinDrops crash guard (multi + single in one step, mixed
+2. Verifies the SpinDrops crash guard (multi and single in one step, mixed
    figures, incomplete figures, mixed measurement bases, unknown UIDs).
-3. Exercises the writer (unique names, dedupe, atomic write).
+3. Tests the writer (unique names, dedupe, atomic write).
 """
 
 import json
@@ -29,22 +29,23 @@ def check(label: str, cond: bool, extra: str = "") -> None:
     if not cond:
         FAILURES.append(label)
 
+# test 1
+# 04xxxxxx UUIDs Do not exist as hardware UUIDs, these are only for testing purposes
 
-# ---------------------------------------------------------------- test 1
 # Teleportation:  Had2 | CNOT23 | CNOT12 | Had1 | Meas z(1,2) | CNOT23 | CZ13
 b = BoardState()
-b.place(1, 0, "04000001")            # H on qubit 2, step 1
-b.place(1, 1, "04000010")            # CNOT#1 control on qubit 2, step 2
-b.place(2, 1, "04000011")            # CNOT#1 target  on qubit 3, step 2
-b.place(0, 2, "04000012")            # CNOT#2 control on qubit 1, step 3
-b.place(1, 2, "04000013")            # CNOT#2 target  on qubit 2, step 3
-b.place(0, 3, "04000002")            # H on qubit 1, step 4
-b.place(0, 4, "04000040")            # measure z qubit 1, step 5
-b.place(1, 4, "04000041")            # measure z qubit 2, step 5
-b.place(1, 5, "04000010")            # CNOT#1 again, step 6
+b.place(1, 0, "04000001")            # H on qubit 2, position 1
+b.place(1, 1, "04000010")            # CNOT#1 control on qubit 2, position 2
+b.place(2, 1, "04000011")            # CNOT#1 target  on qubit 3, position 2
+b.place(0, 2, "04000012")            # CNOT#2 control on qubit 1, position 3
+b.place(1, 2, "04000013")            # CNOT#2 target  on qubit 2, position 3
+b.place(0, 3, "04000002")            # H on qubit 1, position 4
+b.place(0, 4, "04000040")            # measure z qubit 1, position 5
+b.place(1, 4, "04000041")            # measure z qubit 2, position 5
+b.place(1, 5, "04000010")            # CNOT#1 again, position 6
 b.place(2, 5, "04000011")
-b.place(0, 6, "04000020")            # CZ#1 control qubit 1, step 7
-b.place(2, 6, "04000021")            # CZ#1 target  qubit 3, step 7  (skips q2)
+b.place(0, 6, "04000020")            # CZ#1 control qubit 1, position 7
+b.place(2, 6, "04000021")            # CZ#1 target  qubit 3, position 7  (skips qbit2)
 
 cells, _ = b.snapshot()
 res = compose_board(cells, db)
@@ -67,8 +68,7 @@ for i, (got, want) in enumerate(zip(res.table, expected)):
     check(f"step {i + 1} matches teleportation reference", got == want,
           f"got {json.dumps(got)}")
 
-# Cross-check the expression strings against the real reference file if
-# it sits next to this script (optional).
+# Cross-check the expression strings against the real reference file if it sits next to this script (optional).
 ref_path = os.path.join(HERE, "Teleportation.json")
 if os.path.exists(ref_path):
     with open(ref_path, encoding="utf-8") as f:
@@ -83,17 +83,18 @@ if os.path.exists(ref_path):
                 and g.get("multi") == w.get("multi"))
         check(f"step {i + 1} matches Teleportation.json", same)
 
-# ---------------------------------------------------------------- test 2
+# test 2
 # Crash guard: CNOT(1->2) + Hadamard on qubit 3 in the same step.
 b2 = BoardState()
 b2.place(0, 0, "04000010")
 b2.place(1, 0, "04000011")
-b2.place(2, 0, "04000001")           # the SpinDrops-crashing combination
+b2.place(2, 0, "04000001")           # the QuBeads-crashing combination
 cells, _ = b2.snapshot()
 res2 = compose_board(cells, db)
 check("multi + single in one step rejected", not res2.valid,
       "; ".join(res2.all_errors()))
 check("no table emitted when invalid", res2.table is None)
+
 
 # Incomplete figure (control without target).
 b3 = BoardState()
@@ -109,6 +110,7 @@ b4.place(1, 0, "04000013")
 res4 = compose_board(b4.snapshot()[0], db)
 check("mixed figures rejected", not res4.valid,
       "; ".join(res4.all_errors()))
+
 
 # Mixed measurement bases.
 b5 = BoardState()
@@ -134,14 +136,16 @@ check("sqrt array emitted",
       g["gates"] == ["X", "E2", "E2"] and g["sqrt"] == [True, False, False],
       json.dumps(g))
 
-# Empty board equals the empty template's table.
+
+
+# Empty board equals the empty table.
 res8 = compose_board({}, db)
 empty_cols = all(c.json_obj == {"gate": {"gates": ["E2", "E2", "E2"],
                                          "name": "Empty"}}
                  for c in res8.columns)
 check("empty board -> 7 Empty columns", res8.valid and empty_cols)
 
-# ---------------------------------------------------------------- test 3
+#test 3
 with tempfile.TemporaryDirectory() as tmp:
     w = JsonWriter(tmp)
     p1 = w.write(res.table)
@@ -159,7 +163,8 @@ with tempfile.TemporaryDirectory() as tmp:
           doc["Spin System"] == "Homonuclear" and doc["groups"] == []
           and doc["menu_path"] == [] and len(doc["table"]) == 7)
 
+
 print()
-print("ALL TESTS PASSED" if not FAILURES
+print("ALL TESTS PASSED :3" if not FAILURES
       else f"{len(FAILURES)} FAILURES: {FAILURES}")
 raise SystemExit(1 if FAILURES else 0)

@@ -35,7 +35,7 @@ class Abort(Exception):
     """User aborted the current enrollment item (Ctrl+C)."""
 
 
-# ------------------------------------------------------------- input helpers
+# input helpers
 def ask(prompt: str, default: str | None = None,
         required: bool = True) -> str:
     suffix = f" [{default}]" if default is not None else ""
@@ -74,7 +74,7 @@ def ask_choice(prompt: str, choices: list[str]) -> str:
         print("    pick a number from the list")
 
 
-# --------------------------------------------------------------- tag capture
+# tag capture
 class TagSource:
     """Yields UIDs either from column 1 of the hardware or typed by hand."""
 

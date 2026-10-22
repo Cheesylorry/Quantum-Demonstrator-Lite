@@ -7,7 +7,7 @@ Host -> device:
     R        request full resync (device replays PLACE for every occupied pad)
 
 The link runs in a background thread, keeps retrying on connection loss,
-and pushes human-readable status messages into a queue the GUI drains.
+and pushes readable status messages into a queue the GUI drains.
 On every (re)connect the hardware board state is cleared and a resync is
 requested, so stale positions can never survive a reconnect.
 """
@@ -24,6 +24,7 @@ from board import BoardState
 RETRY_INTERVAL_S = 2.0
 
 
+# ToDo: ignore /dev/ttyS[xyz] ports
 def available_ports() -> list[str]:
     return [p.device for p in list_ports.comports()]
 
@@ -42,7 +43,7 @@ class SerialLink(threading.Thread):
     def stop(self) -> None:
         self._stop.set()
 
-    # ------------------------------------------------------------------ run
+    # run
     def run(self) -> None:
         while not self._stop.is_set():
             try:
@@ -78,7 +79,7 @@ class SerialLink(threading.Thread):
             if line:
                 self._handle_line(line)
 
-    # ---------------------------------------------------------------- parse
+    # parse
     def _handle_line(self, line: str) -> None:
         parts = [p.strip() for p in line.split(",")]
         cmd = parts[0].upper()

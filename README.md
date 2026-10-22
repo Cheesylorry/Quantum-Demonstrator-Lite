@@ -1,13 +1,14 @@
 # Quantum-Demonstrator-Lite
-A Plug and play Quantum Algorithm Demonstrator for Students. Integrates into SpinDrops, a software for visualising up to three Qubits, with fully customisable Quantum Gates.
+A Plug and play Quantum Algorithm Demonstrator for Students. Integrates into QuBeads, a software for visualising up to three Qubits, with fully customisable Quantum Gates.
 
 
 ![Title Pic of setup](pics/title_pic.JPG)
 *Picture of the Setup used at the Max Planck Institute of Quantum Optics*
 
 
-The Quantum Demonstrator Lite can be used to demonstrate algorithms up to three Qubits over seven positions, and these can be viewed in Detail with the Spin Drops Software, available at https://spindrops.org/2.5.0-beta1/download.html *(We recommend going with the Beta, as it has the updated visualisation)*
+The Quantum Demonstrator Lite can be used to demonstrate algorithms up to three Qubits over seven positions, and these can be viewed in Detail with the  QuBeads Software, available at https://spindrops.org/2.5.0-beta1/download.html *(We recommend going with the Beta, as it has the updated visualisation)*
 
+    NOTE: The final product is to be used with QuBeads, the successor to SpinDrops. The auto Update is not available in SpinDrops but is on the ToDo for QuBeads.
 
 The Quantum Demontrator Lite utilises 21 RC522 readers to maximise flexibility with the Quantum gates, allowing you to create your own custom gates. These are being controlled by a Raspberry Pi Pico2 Microcontroller, which in turn communicates with the PC over USB. 
 
@@ -27,7 +28,9 @@ For anybody wanting to build the Demonstrator, you should have a few prerequisit
 |[`Electronics/`](Electronics/README.md) contains the PCB Schematic and Board design. The PCB was designed in KiCad.
 Parts needed for the PCB can be found via the Schematics, the BOM or here.
 
-### Main PCB
+### Main PCB (Current state)
+The current State is functional, but a simpler V2 is being worked on.
+
 The Main PCB contains the Raspberry Pi Pico and all the power conversion needed to power the NFC readers, the LEDs and the Pi Pico itself.
 
 | ID | Designator | Value/Component | Footprint | Qty | Source | Cost |
@@ -182,7 +185,7 @@ Quick check without hardware or GUI:
 
     python selftest.py
 
-**For a more in depth explaination:** [`/PC_side_Software/README.md/`](/PC_side_Software/README.md)
+**For a more in depth explaination:** [`/PC_side_Software/README.md`](/PC_side_Software/README.md)
 
 ## Constructing the Quantum Gates
 Download the desired Gates from [`/CAD files/Quantum Gates/`](/CAD%20files/Quantum%20Gates/) and 3D print them. Then glue An NFC Tag into each Indent (on single Qubit gates only one, on Mulit Qubit gates two or even three)
@@ -214,11 +217,11 @@ When enrolling gates the UUID gets entered incorrectly. *Fix: Use multiple reads
 ## ToDo
 - Add GUI to the enroll process
 - Fix framing issues in gui.py
-- Add .desktop entry? 
-- remove file rewrite, overwrite instead
-- Proper spindrops integration
+- Package as Binary
+- Proper spindrops integration -> WIP
 
 
 # Revamped PCB (HEAVY WIP)
 to lower the costs of single piece production move from custom designed Voltage conversion to premade TRACOS.
 
+Staged Design 12V -> 5V -> 3.3? vs Drirect Design 12V -> 5V and 12V -> 3.3V

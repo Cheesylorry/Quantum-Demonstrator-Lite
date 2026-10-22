@@ -54,7 +54,7 @@ mode) to register them into the CSV without leaving the program.
 To add a new gate family (e.g. SWAP), add one entry to `FAMILIES` in
 `families.py` and the matching tag rows to the CSV.
 
-## Validation (SpinDrops crash guard)
+## Validation (QBeads crash guard)
 
 A JSON file is only written when **every** step passes:
 
@@ -68,7 +68,7 @@ the GUI shows the step and the reason in red.
 ## Output files
 
 Only triggered by a change to the arreangement currently on the board with a 600 ms debounce (placing a two-tag figure does not create an intermediate file), deduplicated (identical board content is not rewritten). Each file gets a unique name like
-`Qu_20260720_154212.json`; the internal `name` field matches this. (Reason for this is Spin Drops refusing to open files with the same `Name` entry). Empty positions render as the `Empty` / `["E2","E2","E2"]`,a partially filled board is always a valid 7-step file.
+`Qu_20260720_154212.json`; the internal `name` field matches this. (Reason for this is QBeads refusing to open files with the same `Name` entry). Empty positions render as the `Empty` / `["E2","E2","E2"]`,a partially filled board is always a valid 7-step file.
 
 ## GUI
 
